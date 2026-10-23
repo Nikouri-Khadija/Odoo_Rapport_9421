@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_anciennete_employee,hr.anciennete.employee,model_hr_anciennete,base.group_user,1,0,0,0
+access_hr_anciennete_manager,hr.anciennete.manager,model_hr_anciennete,base.group_system,1,1,1,1
+access_hr_ir_employee,hr.ir.employee,model_hr_ir,base.group_user,1,0,0,0
+access_hr_ir_manager,hr.ir.manager,model_hr_ir,base.group_system,1,1,1,1
+access_hr_cotisation_employee,hr.cotisation.employee,model_hr_cotisation,base.group_user,1,0,0,0
+access_hr_cotisation_manager,hr.cotisation.manager,model_hr_cotisation,base.group_system,1,1,1,1
+access_hr_ir_deduction_employee,hr.ir.deduction.employee,model_hr_ir_deduction,base.group_user,1,0,0,0
+access_hr_ir_deduction_manager,hr.ir.deduction.manager,model_hr_ir_deduction,base.group_system,1,1,1,1

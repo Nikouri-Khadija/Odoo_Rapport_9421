@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_9421_template">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            color: #1a1a1a;
+            margin: 24px;
+            background: #fff;
+        }
+
+        /* ── En-tête ── */
+        .report-title {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .report-title h2 {
+            display: inline-block;
+            border: 2px solid #1F4E79;
+            padding: 6px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #1F4E79;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Infos société ── */
+        .company-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            font-size: 10px;
+        }
+        .company-table td {
+            padding: 5px 8px;
+            border: 1px solid #b0c4d8;
+        }
+        .company-table .label {
+            background-color: #D6E4F0;
+            font-weight: bold;
+            color: #1F4E79;
+            width: 22%;
+        }
+
+        /* ── Tableau principal ── */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8px;
+            table-layout: fixed;
+        }
+        .main-table th, .main-table td {
+            border: 1px solid #8EACC7;
+            padding: 3px 4px;
+            vertical-align: middle;
+        }
+
+        /* Header ligne 1 */
+        .main-table thead tr.h1 {
+            background-color: #1F4E79;
+            color: #fff;
+            text-align: center;
+        }
+        /* Header ligne 2 */
+        .main-table thead tr.h2 {
+            background-color: #2E75B6;
+            color: #fff;
+            text-align: center;
+            font-style: italic;
+            font-size: 7px;
+        }
+
+        /* Lignes données */
+        .main-table tbody tr.row-main { background-color: #fff; }
+        .main-table tbody tr.row-main.alt { background-color: #F5F9FD; }
+        .main-table tbody tr.row-sub { background-color: #fff; }
+        .main-table tbody tr.row-sub.alt { background-color: #F5F9FD; }
+
+        /* Ligne totaux */
+        .main-table tbody tr.totaux {
+            background-color: #BDD7EE;
+            font-weight: bold;
+            font-size: 8.5px;
+        }
+
+        /* Alignements */
+        .c  { text-align: center; }
+        .l  { text-align: left; }
+        .r  { text-align: right; }
+        .bold { font-weight: bold; }
+        .muted { color: #555; font-size: 7px; }
+
+        /* ── Pied de page ── */
+        .footer {
+            margin-top: 28px;
+            font-size: 10px;
+            border-top: 1.5px solid #1F4E79;
+            padding-top: 12px;
+            color: #333;
+        }
+        .footer .sig-line {
+            margin-top: 32px;
+            border-top: 1px solid #555;
+            width: 220px;
+            font-size: 9px;
+            color: #555;
+            padding-top: 4px;
+        }
+
+        /* Largeurs colonnes */
+        .col-mat   { width: 4%; }
+        .col-nom   { width: 14%; }
+        .col-cin   { width: 8%; }
+        .col-if    { width: 6%; }
+        .col-sit   { width: 4%; }
+        .col-ch    { width: 4%; }
+        .col-sbrut { width: 8%; }
+        .col-trans { width: 7%; }
+        .col-taux  { width: 5%; }
+        .col-sbi   { width: 8%; }
+        .col-cimr  { width: 7%; }
+        .col-ret   { width: 7%; }
+        .col-sni   { width: 8%; }
+        .col-jrs   { width: 5%; }
+        .col-ir    { width: 7%; }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ EN-TÊTE ═══ -->
+    <div class="report-title">
+        <h2>
+            ETAT DES TRAITEMENTS ET SALAIRES &#8211; ANNEE
+            <t t-esc="data['annee']"/>
+        </h2>
+    </div>
+
+    <!-- ═══ INFORMATIONS SOCIÉTÉ ═══ -->
+    <table class="company-table">
+        <tr>
+            <td class="label">Raison Sociale :</td>
+            <td><t t-esc="data['company_name']"/></td>
+            <td class="label">N&#176; Identification Fiscale :</td>
+            <td><t t-esc="data['company_if']"/></td>
+        </tr>
+        <tr>
+            <td class="label">Adresse :</td>
+            <td colspan="3">
+                <t t-esc="data['company_street']"/>&#160;<t t-esc="data['company_city']"/>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ═══ TABLEAU EMPLOYÉS ═══ -->
+    <table class="main-table">
+        <colgroup>
+            <col class="col-mat"/>
+            <col class="col-nom"/>
+            <col class="col-cin"/>
+            <col class="col-if"/>
+            <col class="col-sit"/>
+            <col class="col-ch"/>
+            <col class="col-sbrut"/>
+            <col class="col-trans"/>
+            <col class="col-taux"/>
+            <col class="col-sbi"/>
+            <col class="col-cimr"/>
+            <col class="col-ret"/>
+            <col class="col-sni"/>
+            <col class="col-jrs"/>
+            <col class="col-ir"/>
+        </colgroup>
+        <thead>
+            <!-- ── Ligne 1 : libellés principaux ── -->
+            <tr class="h1">
+                <th rowspan="2" class="col-mat" style="vertical-align:middle;">
+                    N&#176;<br/>Matr.
+                </th>
+                <th rowspan="2" class="col-nom" style="vertical-align:middle; text-align:left; padding-left:5px;">
+                    Nom et pr&#233;nom(s)
+                    <br/><span style="font-style:italic; font-weight:normal; font-size:6.5px;">Adresse personnelle</span>
+                </th>
+                <th rowspan="2" class="col-cin" style="vertical-align:middle;">
+                    N&#176; C.N.I / Carte s&#233;jour
+                    <br/><span style="font-style:italic; font-weight:normal; font-size:6.5px;">N&#176; CNSS</span>
+                </th>
+                <th rowspan="2" class="col-if"  style="vertical-align:middle;">N&#176; IF</th>
+                <th rowspan="2" class="col-sit" style="vertical-align:middle;">Sit.<br/>fam.</th>
+                <th rowspan="2" class="col-ch"  style="vertical-align:middle;">Ch.<br/>fam.</th>
+                <th class="col-sbrut" style="vertical-align:middle;">(1) S. Brut<br/>traitements</th>
+                <th class="col-trans" style="vertical-align:middle;">(3) Transport<br/>/ Indem. FP</th>
+                <th rowspan="2" class="col-taux" style="vertical-align:middle;">Taux<br/>F.P.</th>
+                <th rowspan="2" class="col-sbi"  style="vertical-align:middle;">(5) S.B.I</th>
+                <th class="col-cimr" style="vertical-align:middle;">(7) Cotis.<br/>Retraite</th>
+                <th rowspan="2" class="col-ret" style="vertical-align:middle;">(8) Autres<br/>Retenues</th>
+                <th rowspan="2" class="col-sni" style="vertical-align:middle;">(10) S.N.I</th>
+                <th rowspan="2" class="col-jrs" style="vertical-align:middle;">P&#233;riode<br/>en jours</th>
+                <th rowspan="2" class="col-ir"  style="vertical-align:middle;">I.R.<br/>Pr&#233;lev&#233;</th>
+            </tr>
+            <!-- ── Ligne 2 : sous-libellés ── -->
+            <tr class="h2">
+                <th>(2) Avantages<br/>en nature</th>
+                <th>(4) El&#233;m.<br/>exon&#233;r&#233;s</th>
+                <th>(6) Frais pro<br/>calcul&#233;s</th>
+            </tr>
+        </thead>
+        <tbody>
+            <t t-set="total_sbrut"     t-value="0"/>
+            <t t-set="total_transport" t-value="0"/>
+            <t t-set="total_sbi"       t-value="0"/>
+            <t t-set="total_cimr"      t-value="0"/>
+            <t t-set="total_cnss_amo"  t-value="0"/>
+            <t t-set="total_sni"       t-value="0"/>
+            <t t-set="total_ir"        t-value="0"/>
+            <t t-set="total_frais_pro" t-value="0"/>
+            <t t-set="counter"         t-value="0"/>
+
+            <t t-foreach="data['employees']" t-as="emp">
+                <t t-set="counter"  t-value="counter + 1"/>
+                <t t-set="cnss_amo" t-value="emp['cnss'] + emp['amo']"/>
+                <t t-set="charges"  t-value="(1 if emp['emp_marital'] == 'married' else 0) + emp['emp_children']"/>
+                <t t-set="alt_cls"  t-value="'alt' if counter % 2 == 0 else ''"/>
+
+                <!-- ── Ligne 1 : données principales ── -->
+                <tr t-attf-class="row-main {{ alt_cls }}">
+                    <td class="c bold" rowspan="2" style="vertical-align:middle;">
+                        <t t-esc="emp['emp_matricule']"/>
+                    </td>
+                    <td class="l bold">
+                        <t t-esc="emp['emp_name']"/>
+                    </td>
+                    <td class="c"><t t-esc="emp['emp_cin']"/></td>
+                    <td class="c"><t t-esc="emp['emp_fiscal']"/></td>
+                    <td class="c bold">
+                        <t t-if="emp['emp_marital'] == 'married'">M</t>
+                        <t t-elif="emp['emp_marital'] == 'single'">C</t>
+                        <t t-elif="emp['emp_marital'] == 'widower'">V</t>
+                        <t t-elif="emp['emp_marital'] == 'divorced'">D</t>
+                        <t t-else="1"><t t-esc="emp['emp_marital']"/></t>
+                    </td>
+                    <td class="c"><t t-esc="charges"/></td>
+                    <td class="r"><t t-esc="'%.2f' % emp['sbrut']"/></td>
+                    <td class="r"><t t-esc="'%.2f' % emp['transport']"/></td>
+                    <td class="c"><t t-esc="'%.0f' % data['taux_frais_pro']"/>%</td>
+                    <td class="r bold"><t t-esc="'%.2f' % emp['sbi']"/></td>
+                    <td class="r"><t t-esc="'%.2f' % emp['cimr']"/></td>
+                    <td class="r"><t t-esc="'%.2f' % cnss_amo"/></td>
+                    <td class="r bold"><t t-esc="'%.2f' % emp['sni']"/></td>
+                    <td class="c"><t t-esc="emp['jours']"/></td>
+                    <td class="r bold"><t t-esc="'%.2f' % emp['irs_net']"/></td>
+                </tr>
+
+                <!-- ── Ligne 2 : adresse + sous-données ── -->
+                <tr t-attf-class="row-sub {{ alt_cls }}">
+                    <td class="l muted"><t t-esc="emp['emp_address']"/></td>
+                    <td class="c muted"><t t-esc="emp['emp_cnss']"/></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <!-- (2) Avantages en nature -->
+                    <td class="r muted"><t t-esc="'%.2f' % emp['avantage']"/></td>
+                    <!-- (4) Éléments exonérés -->
+                    <td class="r muted"><t t-esc="'%.2f' % emp['exonere']"/></td>
+                    <td></td>
+                    <td></td>
+                    <!-- (6) Frais pro calculés -->
+                    <td class="r muted"><t t-esc="'%.2f' % emp['frais_pro']"/></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <!-- Accumulateurs totaux -->
+                <t t-set="total_sbrut"     t-value="total_sbrut     + emp['sbrut']"/>
+                <t t-set="total_transport" t-value="total_transport  + emp['transport']"/>
+                <t t-set="total_sbi"       t-value="total_sbi        + emp['sbi']"/>
+                <t t-set="total_cimr"      t-value="total_cimr       + emp['cimr']"/>
+                <t t-set="total_cnss_amo"  t-value="total_cnss_amo   + cnss_amo"/>
+                <t t-set="total_sni"       t-value="total_sni        + emp['sni']"/>
+                <t t-set="total_ir"        t-value="total_ir         + emp['irs_net']"/>
+                <t t-set="total_frais_pro" t-value="total_frais_pro  + emp['frais_pro']"/>
+            </t>
+
+            <!-- ── Ligne TOTAL GÉNÉRAL ── -->
+            <tr class="totaux">
+                <td colspan="2" class="c">TOTAL G&#201;N&#201;RAL</td>
+                <td></td><td></td><td></td><td></td>
+                <td class="r"><t t-esc="'%.2f' % total_sbrut"/></td>
+                <td class="r"><t t-esc="'%.2f' % total_transport"/></td>
+                <td></td>
+                <td class="r"><t t-esc="'%.2f' % total_sbi"/></td>
+                <td class="r"><t t-esc="'%.2f' % total_cimr"/></td>
+                <td class="r"><t t-esc="'%.2f' % total_cnss_amo"/></td>
+                <td class="r"><t t-esc="'%.2f' % total_sni"/></td>
+                <td></td>
+                <td class="r"><t t-esc="'%.2f' % total_ir"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══ PIED DE PAGE ═══ -->
+    <div class="footer">
+        <p>Signature et cachet de l&#8217;employeur :</p>
+        
+    </div>
+
+</body>
+</html>
+</template>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================
+         WIZARD : Generer Rapport 9421
+    ============================================================ -->
+    <record id="wizard_rapport_9421_form_view" model="ir.ui.view">
+        <field name="name">wizard.rapport.9421.form</field>
+        <field name="model">wizard.rapport.9421</field>
+        <field name="arch" type="xml">
+            <form string="G&#233;n&#233;rer l&#8217;&#201;tat 9421">
+                <group>
+                    <field name="annee"      string="Ann&#233;e"/>
+                    <field name="company_id" string="Soci&#233;t&#233;"/>
+                </group>
+                <footer>
+                    <button name="action_generer_rapport"
+                            string="G&#233;n&#233;rer le Rapport 9421"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action wizard -->
+    <record id="action_wizard_rapport_9421" model="ir.actions.act_window">
+        <field name="name">&#201;tat 9421</field>
+        <field name="res_model">wizard.rapport.9421</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

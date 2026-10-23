@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_parametrage_paie"
+              name="Paramétrage"
+              parent="payroll.payroll_menu_root"
+              sequence="10"/>
+
+    <menuitem id="menu_baremes_paie"
+              name="Barèmes"
+              parent="menu_parametrage_paie"
+              sequence="10"/>
+
+    <menuitem id="menu_payroll_bareme_anciennete"
+              name="Ancienneté"
+              parent="menu_baremes_paie"
+              action="action_hr_anciennete"
+              sequence="10"/>
+
+    <menuitem id="menu_payroll_bareme_ir"
+              name="IR"
+              parent="menu_baremes_paie"
+              action="action_hr_ir"
+              sequence="20"/> 
+
+    <menuitem id="menu_payroll_bareme_ir_deductions"
+              name="Déductions IR"
+              parent="menu_baremes_paie"
+              action="action_hr_ir_deduction"
+              sequence="25"/>          
+      
+
+    <menuitem id="menu_payroll_cotisations_root"
+              name="Cotisations/Déductions"
+              parent="menu_parametrage_paie"
+              sequence="20"/>
+
+    <menuitem id="menu_payroll_cotisations"
+              name="Cotisations/Déductions"
+              parent="menu_payroll_cotisations_root"
+              action="action_hr_cotisation"
+              sequence="10"/>  
+
+   
+             
+
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue liste (arbre) -->
+    <record id="view_hr_ir_tree" model="ir.ui.view">
+        <field name="name">hr.ir.tree</field>
+        <field name="model">hr.ir</field>
+        <field name="arch" type="xml">
+            <list string="Barème IR" editable="bottom">
+                <field name="debut_tranche" string="Début de Tranche"/>
+                <field name="fin_tranche" string="Fin de tranche"/>
+                <field name="taux" string="Taux (%)"/>
+                <field name="somme_a_deduire" string="Somme à déduire"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire -->
+    <record id="view_hr_ir_form" model="ir.ui.view">
+        <field name="name">hr.ir.form</field>
+        <field name="model">hr.ir</field>
+        <field name="arch" type="xml">
+            <form string="Tranche IR">
+                <sheet>
+                    <group>
+                        <field name="debut_tranche"/>
+                        <field name="fin_tranche"/>
+                        <field name="taux"/>
+                        <field name="somme_a_deduire"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hr_ir" model="ir.actions.act_window">
+        <field name="name">Impôt sur le Revenu (IR)</field>
+        <field name="res_model">hr.ir</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vue Liste -->
+    <record id="view_hr_ir_deduction_list" model="ir.ui.view">
+        <field name="name">hr.ir.deduction.list</field>
+        <field name="model">hr.ir.deduction</field>
+        <field name="arch" type="xml">
+            <list string="Déductions IR" editable="bottom">
+                <field name="deduction_epouse" string="Déduction Épouse (MAD)"/>
+                <field name="deduction_enfant" string="Déduction/Enfant (MAD)"/>
+                <field name="plafond"          string="Plafond Total (MAD)"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue Formulaire -->
+    <record id="view_hr_ir_deduction_form" model="ir.ui.view">
+        <field name="name">hr.ir.deduction.form</field>
+        <field name="model">hr.ir.deduction</field>
+        <field name="arch" type="xml">
+            <form string="Déduction IR">
+                <sheet>
+                    <group>
+                        <field name="deduction_epouse" string="Déduction Épouse (MAD)"/>
+                        <field name="deduction_enfant" string="Déduction par Enfant (MAD)"/>
+                        <field name="plafond"          string="Plafond Total (MAD)"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hr_ir_deduction" model="ir.actions.act_window">
+        <field name="name">Déductions IR</field>
+        <field name="res_model">hr.ir.deduction</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer la configuration des déductions IR
+            </p>
+            <p>Saisissez les montants de déduction épouse, enfant et le plafond mensuel.</p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_rapport_9421_user,wizard.rapport.9421 user,model_wizard_rapport_9421,payroll.group_payroll_user,1,1,1,1
+access_wizard_rapport_9421_manager,wizard.rapport.9421 manager,model_wizard_rapport_9421,payroll.group_payroll_manager,1,1,1,1
+access_rapport_9421_config_manager,rapport.9421.config manager,model_rapport_9421_config,payroll.group_payroll_manager,1,1,1,1
+access_rapport_9421_historique_user,rapport.9421.historique user,model_rapport_9421_historique,payroll.group_payroll_user,1,0,0,0
+access_rapport_9421_historique_manager,rapport.9421.historique manager,model_rapport_9421_historique,payroll.group_payroll_manager,1,1,1,1

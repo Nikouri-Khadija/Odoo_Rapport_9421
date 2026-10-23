@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_cotisation_list" model="ir.ui.view">
+        <field name="name">hr.cotisation.list</field>
+        <field name="model">hr.cotisation</field>
+        <field name="arch" type="xml">
+            <list string="Cotisations" editable="bottom">
+                <field name="code" string="Code"/>
+                <field name="designation" string="Désignation"/>
+                <field name="taux_salarial" string="Taux Salariale (%)"/>
+                <field name="cotisation_plafonnee" string="Plafonnée"/>
+                <field name="plafond" string="Plafond"
+                       readonly="not cotisation_plafonnee"
+                       invisible="not cotisation_plafonnee"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_cotisation_form" model="ir.ui.view">
+        <field name="name">hr.cotisation.form</field>
+        <field name="model">hr.cotisation</field>
+        <field name="arch" type="xml">
+            <form string="Cotisation">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="designation"/>
+                        <field name="taux_salarial"/>
+                        <field name="cotisation_plafonnee"/>
+                        <field name="plafond"
+                               readonly="not cotisation_plafonnee"
+                               invisible="not cotisation_plafonnee"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_cotisation" model="ir.actions.act_window">
+        <field name="name">Cotisations</field>
+        <field name="res_model">hr.cotisation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

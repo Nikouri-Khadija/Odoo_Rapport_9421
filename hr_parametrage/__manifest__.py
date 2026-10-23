@@ -1,0 +1,20 @@
+{
+    'name': 'Paramétrage Paie',
+    'version': '18.0.1.0.0',
+    'summary': 'Paramétrages de paie (ancienneté, IR, primes, ...)',
+    'description': 'Module central pour les configurations de paie',
+    'author': 'Nikouri Khadija',
+    'category': 'Payroll',
+    'depends': ['payroll'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/hr_anciennete_views.xml',
+        'views/hr_ir_views.xml',
+        'views/hr_cotisation_views.xml',
+        'views/hr_ir_deduction_views.xml',
+        'views/menu.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}
